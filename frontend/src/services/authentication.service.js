@@ -17,9 +17,9 @@ function isAuthenticated() {
     return token !== null && token !== undefined
 }
 
-function login(username, email, password) {
+function login(username, password) {
     return axios.post(api.auth.login, {
-        username, email, password
+        username, password
     })
     .then(res => {
         localStorage.setItem("token", res.data.key)

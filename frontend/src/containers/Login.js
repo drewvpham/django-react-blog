@@ -10,14 +10,12 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
 
   function handleSubmit(e) {
     setLoading(true);
     e.preventDefault()
-    authenticationService.signup(username, email, password, confirmPassword)
+    authenticationService.login(username, password)
       .then(res => {
         setLoading(false);
         history.push('/')
@@ -34,48 +32,30 @@ const Login = () => {
 
   return (
     <Container>
-      <Header>Signup for an account</Header>
+      <Header>Login to your account</Header>
       {error && (
         <Message danger message={error} />
       )}
       <Form onSubmit={handleSubmit}>
         <Form.Field>
           <label>Username</label>
-          <input 
-              placeholder='Username' 
+          <input
+              placeholder='Username'
               value={username}
               type='text'
               onChange={e => setUsername(e.target.value)}
           />
         </Form.Field>
         <Form.Field>
-          <label>Email</label>
-          <input 
-              placeholder='Email' 
-              value={email}
-              type='email'
-              onChange={e => setEmail(e.target.value)}
-          />
-        </Form.Field>
-        <Form.Field>
           <label>Password</label>
-          <input 
-              placeholder='Password' 
+          <input
+              placeholder='Password'
               value={password}
               type='password'
               onChange={e => setPassword(e.target.value)}
           />
         </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <input 
-              placeholder='Confirm Password' 
-              value={confirmPassword}
-              type='password'
-              onChange={e => setConfirmPassword(e.target.value)}
-          />
-        </Form.Field>
-        <Button primary fluid loading={loading} disabled={loading} type='submit'>Signup</Button>
+        <Button primary fluid loading={loading} disabled={loading} type='submit'>Login</Button>
       </Form>
     </Container>
   )

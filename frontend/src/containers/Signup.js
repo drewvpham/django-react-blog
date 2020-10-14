@@ -12,16 +12,19 @@ const Login = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
 
   function handleSubmit(e) {
     setLoading(true);
     e.preventDefault()
-    authenticationService.login(username, email, password)
+    authenticationService.signup(username, email, password, confirmPassword)
       .then(res => {
+         console.log(res,'in here!')
         setLoading(false);
         history.push('/')
       })
       .catch(error => {
+        console.log(error,'in here!')
         setLoading(false);
         setError(error.message || error)
       })
@@ -33,15 +36,15 @@ const Login = () => {
 
   return (
     <Container>
-      <Header>Login to your account</Header>
+      <Header>Signup for an account</Header>
       {error && (
         <Message danger message={error} />
       )}
       <Form onSubmit={handleSubmit}>
         <Form.Field>
           <label>Username</label>
-          <input 
-              placeholder='Username' 
+          <input
+              placeholder='Username'
               value={username}
               type='text'
               onChange={e => setUsername(e.target.value)}
@@ -49,8 +52,8 @@ const Login = () => {
         </Form.Field>
         <Form.Field>
           <label>Email</label>
-          <input 
-              placeholder='Email' 
+          <input
+              placeholder='Email'
               value={email}
               type='email'
               onChange={e => setEmail(e.target.value)}
@@ -58,14 +61,23 @@ const Login = () => {
         </Form.Field>
         <Form.Field>
           <label>Password</label>
-          <input 
-              placeholder='Password' 
+          <input
+              placeholder='Password'
               value={password}
               type='password'
               onChange={e => setPassword(e.target.value)}
           />
         </Form.Field>
-        <Button primary fluid loading={loading} disabled={loading} type='submit'>Login</Button>
+        <Form.Field>
+          <label>Confirm Password</label>
+          <input
+              placeholder='Confirm Password'
+              value={confirmPassword}
+              type='password'
+              onChange={e => setConfirmPassword(e.target.value)}
+          />
+        </Form.Field>
+        <Button primary fluid loading={loading} disabled={loading} type='submit'>Signup</Button>
       </Form>
     </Container>
   )

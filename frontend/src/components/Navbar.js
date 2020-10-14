@@ -12,9 +12,10 @@ const Navbar = () => {
     <div>
       <Menu fixed='top' inverted>
         <Container>
-          <Menu.Item as='a' header>
+          <NavLink to='/'><Menu.Item as='a' header>
             React Markdown Blog
           </Menu.Item>
+          </NavLink>
           <NavLink to='/'><Menu.Item as='li'>Posts</Menu.Item></NavLink>
           {authenticationService.isAuthenticated ? (
             <>
@@ -33,7 +34,7 @@ const Navbar = () => {
             </>
           )}
         </Container>
-      </Menu>    
+      </Menu>
     </div>
   )
 }
