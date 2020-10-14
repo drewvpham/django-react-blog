@@ -2,8 +2,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'nvdu=cv!r0qmior53+d#d!ul)mbq$d3ef1q83t@=c_=9o!66lk'
-DEBUG = True
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+DEBUG = False
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "3.221.155.71"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -61,12 +61,24 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'blogdb',
+            'USER': 'blog_admin',
+            'PASSWORD': 'testing123',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 
 # Password validation
